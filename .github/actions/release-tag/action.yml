@@ -1,0 +1,12 @@
+name: 'Release tag'
+description: 'Create tag by the branch'
+inputs:
+  source-branch:
+    description: 'Repository name with owner. For example, actions/checkout
+    required: true
+
+run: 
+  using: "composit"
+  steps:
+    - name: Testing workflow
+      run: echo "Heloooooo"
