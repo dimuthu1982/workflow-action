@@ -10,4 +10,4 @@ jobs:
   runs-on: ubuntu-latest
   steps:
     - name: Testing workflow Root
-      run: echo "Heloooooo ${{ inputs.source-branch }}"
+      run: echo "Heloooooo ${{ github.event.inputs.source-branch }}"
