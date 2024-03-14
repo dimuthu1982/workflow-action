@@ -51,9 +51,9 @@ runs:
       name: Initiating Next Version Lookup
       id: next_release_tag_lookup
       uses: reecetech/version-increment@2023.10.1
-        with:
-          use_api: true
-         increment: ${{ steps.release_type.outputs.RELEASE_TYPE }}
+      with:
+        use_api: true
+        increment: ${{ steps.release_type.outputs.RELEASE_TYPE }}
       shell: bash
 
     - name: Next Release Version
