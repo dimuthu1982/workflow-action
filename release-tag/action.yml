@@ -2,7 +2,7 @@ name: 'Release tag'
 description: 'Create tag by the branch'
 inputs:
   source-branch:
-    description: 'Repository name with owner. For example, actions/checkout
+    description: 'Repository name with owner. For example, actions/checkout'
     required: true
 
 run: 
