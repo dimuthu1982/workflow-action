@@ -9,7 +9,7 @@ runs:
   using: "composite"
   steps: 
     - uses: actions/checkout@v4
-        - if: ${{ startsWith(inputs.sourcebranch, 'release/') }}
+        - if: startsWith(inputs.sourcebranch, 'release/')
           name: Find Release Version From Branch
           id: release_tag_in_branch
           run: | 
