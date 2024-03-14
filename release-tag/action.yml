@@ -5,8 +5,9 @@ inputs:
     description: 'Repository name with owner. For example, actions/checkout'
     required: true
 
-run: 
-  using: "composit"
+jobs:
+  create_tag:
+  runs-on: ubuntu-latest
   steps:
     - name: Testing workflow Root
       run: echo "Heloooooo ${{ inputs.source-branch }}"
