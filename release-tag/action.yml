@@ -46,5 +46,25 @@ runs:
               exit 0;
              fi
       shell: bash
+      
+    - if: ${{ steps.release_type.outputs.RELEASE_TYPE }}
+      name: Initiating Next Version Lookup
+      id: next_release_tag_lookup
+      uses: reecetech/version-increment@2023.10.1
+       with:
+       use_api: true
+       increment: ${{ steps.release_type.outputs.RELEASE_TYPE }}
+      shell: bash
+
+    - name: Next Release Version
+     id: next_version
+     run: echo "TAG_NAME=${{ steps.next_release_tag_lookup.outputs.version }}" >> $GITHUB_OUTPUT
+     shell: bash
+
+    - name: Print Tag
+     run: | 
+            echo "Release Tag - ${{ steps.release_tag_in_branch.outputs.TAG_NAME }}"
+            echo "Next Release - ${{ steps.next_version.outputs.TAG_NAME }}"
+     shell: bash
 
 
