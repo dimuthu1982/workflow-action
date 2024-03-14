@@ -8,6 +8,9 @@ inputs:
 runs:
   using: "composite"
   steps: 
+    - run: echo "Prinitng : ${{ inputs.sourcebranch }}"
+    shell: bash
+    
     - uses: actions/checkout@v4
         - if: startsWith(inputs.sourcebranch, 'release/')
           name: Find Release Version From Branch
@@ -34,7 +37,7 @@ runs:
              else 
               exit 0;
              fi
-           shell: bash
+          shell: bash
 
         - if: ${{ steps.release_type.outputs.RELEASE_TYPE }}
           name: Initiating Next Version Lookup
