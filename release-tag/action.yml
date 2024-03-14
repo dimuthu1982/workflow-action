@@ -9,11 +9,11 @@ runs:
   using: "composite"
   steps: 
     - uses: actions/checkout@v4
-        - if: ${{ startsWith(sourcebranch, 'release/') }}
+        - if: ${{ startsWith(inputs.sourcebranch, 'release/') }}
           name: Find Release Version From Branch
           id: release_tag_in_branch
           run: | 
-            currentBranch="${{ sourcebranch }}"
+            currentBranch="${{ inputs.sourcebranch }}"
             echo "Branch Name - ${currentBranch}"
             extractedVersion=${currentBranch/'release/'}
             echo "Extracted Version - ${extractedVersion}"
@@ -23,7 +23,7 @@ runs:
           name: Find Release version By Branch
           id: release_type
           run: |
-             currentBranch="${{ sourcebranch }}" 
+             currentBranch="${{ inputs.sourcebranch }}" 
              if [[ $currentBranch == 'release' ]]; then 
               echo "Identifyed as minor release"
               echo "RELEASE_TYPE=minor" >> $GITHUB_OUTPUT
