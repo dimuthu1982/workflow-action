@@ -32,7 +32,19 @@ runs:
       shell: bash
       
     - if: ${{ !steps.release_tag_in_branch.outputs.TAG_NAME }} 
-      run: echo "EMPTYYYYYYY"
+      name: Find Release version By Branch
+      id: release_type
+      run: |
+            currentBranch="${{ inputs.sourcebranch }}" 
+             if [[ $currentBranch == 'release' ]]; then 
+              echo "Identifyed as minor release"
+              echo "RELEASE_TYPE=minor" >> $GITHUB_OUTPUT
+             elif [[ $currentBranch == hotfix/* ]]; then 
+              echo "Identifyed as patch release"
+              echo "RELEASE_TYPE=patch" >> $GITHUB_OUTPUT
+             else 
+              exit 0;
+             fi
       shell: bash
 
 
