@@ -1,13 +1,19 @@
 name: 'Release tag'
 description: 'Create tag by the branch'
 inputs:
-  source-branch:
+  sourcebranch:
     description: 'Repository name with owner. For example, actions/checkout'
     required: true
 
-jobs:
-  create_tag:
-  runs-on: ubuntu-latest
-  steps:
+runs:
+  using: "composit"
+  steps: 
     - name: Testing workflow Root
-      run: echo "Heloooooo ${{ github.event.inputs.source-branch }}"
+      run: echo "Heloooooo ${{ inputs.sourcebranch }}"
+
+#jobs:
+#  create_tag:
+#  runs-on: ubuntu-latest
+#  steps:
+#    - name: Testing workflow Root
+#      run: echo "Heloooooo ${{ github.event.inputs.source-branch }}"
