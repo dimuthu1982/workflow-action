@@ -9,4 +9,4 @@ run:
   using: "composit"
   steps:
     - name: Testing workflow
-      run: echo "Heloooooo"
+      run: echo "Heloooooo ${{ inputs.source-branch }}"
