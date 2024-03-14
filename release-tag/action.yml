@@ -26,7 +26,9 @@ runs:
       shell: bash
 
     - name: DEbug 
-      run: echo "TAG_NAME ---> ${{ env.TAG_NAME }}"
+      run: |
+        echo "TAG_NAME ---> ${{ env.TAG_NAME }}"
+        echo "TAG_NAME1 ---> ${{ steps.release_tag_in_branch.outputs.TAG_NAME }}"
       shell: bash
 
 
