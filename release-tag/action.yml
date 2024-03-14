@@ -27,5 +27,6 @@ runs:
 
     - name: DEbug 
       run: echo "TAG_NAME ---> ${{ env.TAG_NAME }}"
+      shell: bash
 
 
