@@ -2,14 +2,14 @@ name: 'Release tag'
 description: 'Create tag by the branch'
 inputs:
   sourcebranch:
-    description: 'Repository name with owner. For example, actions/checkout'
+    description: 'Branch name to be tagged'
     required: true
 
 runs:
   using: "composite"
   steps: 
-    - name: "Print"
-      run: echo "Prinitng - ${{ inputs.sourcebranch }}"
+    - name: "Branch Nme"
+      run: echo "Branch Name - ${{ inputs.sourcebranch }}"
       shell: bash
     
     - uses: actions/checkout@v4
