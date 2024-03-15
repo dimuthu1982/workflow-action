@@ -39,5 +39,5 @@ runs:
   - name: Send Slack Message
     id: slack
     if: ${{ env.FORMATTED_PR_MESSAGES }}
-    run: echo "Slack Message -  ${{ env.FORMATTED_PR_MESSAGES }}"
+    run: echo "Slack Message -  (${{ env.FORMATTED_PR_MESSAGES }})"
     shell: bash
