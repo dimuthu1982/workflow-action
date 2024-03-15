@@ -1,7 +1,7 @@
 name: 'Release tag'
 description: 'Create tag by the branch'
 inputs:
-  sourcebranch:
+  channelid:
     description: 'Branch name to be tagged'
     required: true
     
