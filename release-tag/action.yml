@@ -4,6 +4,11 @@ inputs:
   sourcebranch:
     description: 'Branch name to be tagged'
     required: true
+    
+outputs:
+  tag:
+    description: "The Tag"
+    value: ${{ steps.create_tag.outputs.tag }}
 
 runs:
   using: "composite"
@@ -62,11 +67,13 @@ runs:
 
     - if: ${{ steps.release_tag_in_branch.outputs.TAG_NAME || steps.next_version.outputs.TAG_NAME }}
       name: Create Tag
+      id: create_tag
       env:
        RELEASE_TAG_IN_BRANCH: ${{ steps.release_tag_in_branch.outputs.TAG_NAME }}
        NEXT_TAG: ${{  steps.next_version.outputs.TAG_NAME }}
       run: |
               RELEASING_TAG=$([ $RELEASE_TAG_IN_BRANCH ] && echo "$RELEASE_TAG_IN_BRANCH" || echo "$NEXT_TAG")
+              echo "tag=$RELEASING_TAG" >> $GITHUB_OUTPUT
               echo "Next Tag - $RELEASING_TAG"
               git config --global user.name "GitHub Actions"
               git tag -a $RELEASING_TAG -m "Release $RELEASING_TAG"
