@@ -1,7 +1,7 @@
 name: 'Release tag'
 description: 'Create tag by the branch'
 inputs:
-  sourcebranch:
+  source-branch:
     description: 'Branch name to be tagged'
     required: true
     
@@ -14,15 +14,15 @@ runs:
   using: "composite"
   steps: 
     - name: "Branch Nme"
-      run: echo "Branch Name - ${{ inputs.sourcebranch }}"
+      run: echo "Branch Name - ${{ inputs.source-branch }}"
       shell: bash
     
     - uses: actions/checkout@v4
-    - if: startsWith(inputs.sourcebranch, 'release/')
+    - if: startsWith(inputs.source-branch, 'release/')
       name: Find Release Version From Branch
       id: release_tag_in_branch
       run: | 
-            currentBranch="${{ inputs.sourcebranch }}"
+            currentBranch="${{ inputs.source-branch }}"
             echo "Branch Name - ${currentBranch}"
             extractedVersion=${currentBranch/'release/'}
             echo "Extracted Version - ${extractedVersion}"
@@ -34,7 +34,7 @@ runs:
       name: Find Release version By Branch
       id: release_type
       run: |
-            currentBranch="${{ inputs.sourcebranch }}" 
+            currentBranch="${{ inputs.source-branch }}" 
              if [[ $currentBranch == 'release' ]]; then 
               echo "Identifyed as minor release"
               echo "RELEASE_TYPE=minor" >> $GITHUB_OUTPUT
