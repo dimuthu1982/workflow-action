@@ -36,7 +36,7 @@ runs:
     env:
         GH_TOKEN: ${{ github.token }}
 
-   - name: Send Slack Message
-      id: slack
-      if: ${{ env.FORMATTED_PR_MESSAGES }}
-      run: echo "Message -  ${{ env.FORMATTED_PR_MESSAGES }}"
+  - name: Send Slack Message
+    id: slack
+    if: ${{ env.FORMATTED_PR_MESSAGES }}
+    run: echo "Slack Message -  ${{ env.FORMATTED_PR_MESSAGES }}"
