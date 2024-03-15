@@ -1,0 +1,42 @@
+name: 'Release tag'
+description: 'Create tag by the branch'
+inputs:
+  sourcebranch:
+    description: 'Branch name to be tagged'
+    required: true
+    
+runs:
+  using: "composite"
+  steps: 
+  - uses: actions/checkout@v4
+  - name: Colleting Open Pull Requests
+    run: |
+        openPrs="$(gh pr list --json title,url,reviews)"
+        OPEN_PULL_REQUESTS=$openPrs
+        ALL_PR_MESSAGES=""
+        for row in $(echo "${OPEN_PULL_REQUESTS}" | jq -r '.[] | @base64'); do
+          _jq() {
+            echo ${row} | base64 --decode | jq -r ${1}
+          }
+          title=$(_jq '.title')
+          url=$(_jq '.url')
+          reviews=$(_jq '.reviews')
+          approvedStatus=$(echo $reviews | jq '.[] | select(.state=="APPROVED") | .state')
+           approvals=""
+           for i in $approvedStatus 
+           do
+            approvals+=" :tick1:"
+          done
+          ALL_PR_MESSAGES+="• <$url|$title> $approvals\n"
+          echo "ALL_PR_MESSAGES - $ALL_PR_MESSAGES"
+        done
+        echo "FORMATTED_PR_MESSAGES=$ALL_PR_MESSAGES" >> $GITHUB_ENV
+    shell: bash
+    
+    env:
+        GH_TOKEN: ${{ github.token }}
+
+   - name: Send Slack Message
+      id: slack
+      if: ${{ env.FORMATTED_PR_MESSAGES }}
+      run: echo "Message -  ${{ env.FORMATTED_PR_MESSAGES }}"
