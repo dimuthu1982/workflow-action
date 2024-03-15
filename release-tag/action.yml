@@ -56,14 +56,14 @@ runs:
         increment: ${{ steps.release_type.outputs.RELEASE_TYPE }}
 
     - name: Next Release Version
-     id: next_version
-     run: echo "TAG_NAME=${{ steps.next_release_tag_lookup.outputs.version }}" >> $GITHUB_OUTPUT
-     shell: bash
+      id: next_version
+      run: echo "TAG_NAME=${{ steps.next_release_tag_lookup.outputs.version }}" >> $GITHUB_OUTPUT
+      shell: bash
 
     - name: Print Tag
-     run: | 
+      run: | 
             echo "Release Tag - ${{ steps.release_tag_in_branch.outputs.TAG_NAME }}"
             echo "Next Release - ${{ steps.next_version.outputs.TAG_NAME }}"
-     shell: bash
+      shell: bash
 
 
