@@ -13,8 +13,8 @@ outputs:
 runs:
   using: "composite"
   steps: 
-    - name: "Branch Nme"
-      run: echo "Branch Name - ${{ inputs.source-branch }}"
+    - name: "Branch Name"
+      run: echo "Branch Name123 - ${{ inputs.source-branch }}"
       shell: bash
     
     - uses: actions/checkout@v4
