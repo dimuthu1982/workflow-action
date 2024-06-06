@@ -10,7 +10,7 @@ try {
   console.log(`Retaining Days: ${retainingDays}`);
 
   let pastWorkflowsString = execSync(
-    `gh run list --repo ${repositoryPath} --json name,number,createdAt --limit 30`
+    `gh run list --repo ${repositoryPath} --json name,number,createdAt --limit 50`
   );
 
   const lastDate = new Date();
