@@ -17,6 +17,9 @@ try {
   lastDate.setDate(lastDate.getDate() - 30);
   console.log("Last Day:" + lastDate.toLocaleDateString());
 
+ console.log(`pastWorkflows: ${pastWorkflows}`);
+  console.log(`pastWorkflows.length: ${pastWorkflows.length}`);
+  
   for (workFlow of pastWorkflows) {
     const createdAt = new Date(workFlow.createdAt);
 
