@@ -15,7 +15,8 @@ try {
 
   const lastDate = new Date();
   lastDate.setDate(lastDate.getDate() - retainingDays);
-  console.log("Last Day:" + lastDate.toLocaleDateString());
+  console.log("Last Day 1:" + lastDate);
+  console.log("Last Day 2:" + lastDate.toLocaleDateString());
 
   const pastWorkflows = JSON.parse(pastWorkflowsString);
 
