@@ -6,35 +6,28 @@ try {
   const repositoryPath = core.getInput("repo-path");
   const retainingDays = core.getInput("retaining-days");
 
+  const lastDate = new Date();
+  lastDate.setDate(lastDate.getDate() - retainingDays);
+  
   console.log(`Repo Path: ${repositoryPath}`);
   console.log(`Retaining Days: ${retainingDays}`);
+  console.log(`Day Onwords: ${lastDate.toLocaleDateString('en-AU')}`);
 
   let pastWorkflowsString = execSync(
     `gh run list --repo ${repositoryPath} --json name,databaseId,createdAt --limit 60`
   );
 
-  const lastDate = new Date();
-  console.log("Today Day 1:" + lastDate);
-  console.log("Today Day 2:" + lastDate.toLocaleDateString());
-
-  
-  lastDate.setDate(lastDate.getDate() - retainingDays);
-  console.log("Last Day 3:" + lastDate);
-  console.log("Last Day 4:" + lastDate.toLocaleDateString());
-
   const pastWorkflows = JSON.parse(pastWorkflowsString);
 
   for (workFlow of pastWorkflows) {
-    const createdAt = new Date(workFlow.createdAt);
-
-    console.log("Data1:" + createdAt + ", Data2:" +  createdAt.toLocaleDateString());
+    const createdAt = new Date(workFlow.createdAt).toLocaleDateString('en-AU');
 
     if (lastDate.getTime() > createdAt.getTime()) {
-      console.log(`Deleting [name: ${workFlow.name}, Created: ${workFlow.createdAt}, DB ID: ${workFlow.databaseId}]`);
+      console.log(`Deleting [name: ${workFlow.name}, Created: ${createdAt}, DB ID: ${workFlow.databaseId}]`);
       execSync(`gh run delete --repo ${repositoryPath} ${workFlow.databaseId}`)
     } else {
       console.log(
-        `Skip [name: ${workFlow.name}, Created: ${workFlow.createdAt}, Number: ${workFlow.databaseId}]`
+        `Skip [name: ${workFlow.name}, Created: ${workFlow.createdAt}, DB ID: ${workFlow.databaseId}]`
       );
     }
   }
