@@ -1,7 +1,7 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  repository:  # id of input
+  repo-path:  
     description: 'Repo name'
     required: true
     default: 'repo'
