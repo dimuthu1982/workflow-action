@@ -31,6 +31,7 @@ try {
 
     if (lastDate.getTime() > createdAt.getTime()) {
       console.log(`Deleting [name: ${workFlow.name}, Created: ${workFlow.createdAt}, Number: ${workFlow.number}]`);
+      execSync(`gh run delete ${workFlow.number}`)
     } else {
       console.log(
         `Skip [name: ${workFlow.name}, Created: ${workFlow.createdAt}, Number: ${workFlow.number}]`
