@@ -20,10 +20,10 @@ try {
   const pastWorkflows = JSON.parse(pastWorkflowsString);
 
   for (workFlow of pastWorkflows) {
-    const createdAt = new Date(workFlow.createdAt).toLocaleDateString('en-AU');
+    const createdAt = new Date(workFlow.createdAt);
 
     if (lastDate.getTime() > createdAt.getTime()) {
-      console.log(`Deleting [name: ${workFlow.name}, Created: ${createdAt}, DB ID: ${workFlow.databaseId}]`);
+      console.log(`Deleting [name: ${workFlow.name}, Created: ${lastDate.toLocaleDateString('en-AU')}, DB ID: ${workFlow.databaseId}]`);
       execSync(`gh run delete --repo ${repositoryPath} ${workFlow.databaseId}`)
     } else {
       console.log(
