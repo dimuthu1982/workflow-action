@@ -4,7 +4,11 @@ inputs:
   repo-path:  
     description: 'Repo name'
     required: true
-    default: 'repo'
+  retaining-days:  
+    description: 'Retaining Days'
+    required: false
+    default: 30
+
 outputs:
   time: # id of output
     description: 'The time we greeted you'
