@@ -8,29 +8,36 @@ try {
 
   const lastDate = new Date();
   lastDate.setDate(lastDate.getDate() - retainingDays);
-  
+
   console.log(`Repo Path: ${repositoryPath}`);
   console.log(`Retaining Days: ${retainingDays}`);
-  console.log(`Day Onwords: ${lastDate.toLocaleDateString('en-AU')}`);
-
-  let pastWorkflowsString = execSync(
-    `gh run list --repo ${repositoryPath} --json name,databaseId,createdAt --limit 50`
+  console.log(
+    `Retaining Workflows Created Onwords: ${lastDate.toLocaleDateString(
+      "en-AU"
+    )}`
   );
 
-  const pastWorkflows = JSON.parse(pastWorkflowsString);
+  var hasObsoleteWorkflows = false;
 
-  for (workFlow of pastWorkflows) {
-    const createdAt = new Date(workFlow.createdAt);
+  do {
 
-    if (lastDate.getTime() > createdAt.getTime()) {
-      console.log(`Deleting [name: ${workFlow.name}, Created: ${lastDate.toLocaleDateString('en-AU')}, DB ID: ${workFlow.databaseId}]`);
-      execSync(`gh run delete --repo ${repositoryPath} ${workFlow.databaseId}`)
-    } else {
-      console.log(
-        `Skip [name: ${workFlow.name}, Created: ${workFlow.createdAt}, DB ID: ${workFlow.databaseId}]`
-      );
+    let pastWorkflowsString = execSync(`gh run list --repo ${repositoryPath} --json name,databaseId,createdAt --limit 50`);
+
+    const pastWorkflows = JSON.parse(pastWorkflowsString);
+
+    for (workFlow of pastWorkflows) {
+      const createdAt = new Date(workFlow.createdAt);
+
+      if (lastDate.getTime() > createdAt.getTime()) {
+        console.log(`Deleting [name: ${workFlow.name}, Created: ${lastDate.toLocaleDateString("en-AU")}, DB ID: ${workFlow.databaseId}]`);
+        execSync(`gh run delete --repo ${repositoryPath} ${workFlow.databaseId}`);
+        hasObsoleteWorkflows = true;
+      } else {
+        console.log(`Skip [name: ${workFlow.name}, Created: ${workFlow.createdAt}, DB ID: ${workFlow.databaseId}]`);
+      }
     }
-  }
+  } while (hasObsoleteWorkflows);
+
 } catch (error) {
   core.setFailed(error.message);
 }
