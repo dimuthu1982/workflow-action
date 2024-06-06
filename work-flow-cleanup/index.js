@@ -7,10 +7,10 @@ try {
   const time = new Date().toTimeString();
   core.setOutput("time", time);
 
-  console.log("Repo: ${repository}");
+  console.log("Repo: ${{ repository }}");
 
   let pastWorkflows = execSync(
-    "gh run list --repo ${repository} --json name,number,createdAt --limit 10"
+    "gh run list --repo ${{ repository }} --json name,number,createdAt --limit 10"
   );
   
   const lastDate = new Date();
