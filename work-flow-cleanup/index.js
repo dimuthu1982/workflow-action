@@ -5,21 +5,19 @@ var execSync = require("child_process").execSync;
 try {
   const repositoryPath = core.getInput("repo-path");
   const retainingDays = core.getInput("retaining-days");
-  const time = new Date().toTimeString();
-  core.setOutput("time", time);
 
   console.log(`Repo Path: ${repositoryPath}`);
   console.log(`Retaining Days: ${retainingDays}`);
 
-  let pastWorkflows1 = execSync(
+  let pastWorkflowsString = execSync(
     `gh run list --repo ${repositoryPath} --json name,number,createdAt --limit 20`
   );
 
   const lastDate = new Date();
-  lastDate.setDate(lastDate.getDate() - ${retainingDays});
+  lastDate.setDate(lastDate.getDate() - retainingDays);
   console.log("Last Day:" + lastDate.toLocaleDateString());
 
-  const pastWorkflows = JSON.parse(pastWorkflows1);
+  const pastWorkflows = JSON.parse(pastWorkflowsString);
 
   for (workFlow of pastWorkflows) {
     const createdAt = new Date(workFlow.createdAt);
