@@ -14,7 +14,7 @@ try {
   console.log(`Day Onwords: ${lastDate.toLocaleDateString('en-AU')}`);
 
   let pastWorkflowsString = execSync(
-    `gh run list --repo ${repositoryPath} --json name,databaseId,createdAt --limit 60`
+    `gh run list --repo ${repositoryPath} --json name,databaseId,createdAt --limit 50`
   );
 
   const pastWorkflows = JSON.parse(pastWorkflowsString);
