@@ -29,7 +29,7 @@ try {
 
     console.log("Data1:" + createdAt + ", Data2:" +  createdAt.toLocaleDateString());
 
-    if (lastDate.getTime() > createdAt.getTime) {
+    if (lastDate.getTime() > createdAt.getTime()) {
       console.log(`Deleting [name: ${workFlow.name}, Created: ${workFlow.createdAt}, Number: ${workFlow.number}]`);
     } else {
       console.log(
