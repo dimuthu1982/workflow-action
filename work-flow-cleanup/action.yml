@@ -9,9 +9,6 @@ inputs:
     required: false
     default: 30
 
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
 runs:
   using: 'node20'
   main: 'index.js'
