@@ -33,7 +33,7 @@ try {
         execSync(`gh run delete --repo ${repositoryPath} ${workFlow.databaseId}`);
         hasObsoleteWorkflows = true;
       } else {
-        console.log(`Skip [name: ${workFlow.name}, Created: ${workFlow.createdAt}, DB ID: ${workFlow.databaseId}]`);
+        console.log(`Skip [name: ${workFlow.name}, Created: ${lastDate.toLocaleDateString("en-AU")}, DB ID: ${workFlow.databaseId}]`);
       }
     }
   } while (hasObsoleteWorkflows);
