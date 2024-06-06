@@ -6,7 +6,7 @@ var execSync = require('child_process').execSync;
 try {
   // `who-to-greet` input defined in action metadata file
   const nameToGreet = core.getInput("who-to-greet");
-  console.log(`Hello V1);
+  console.log(`Hello V1`);
   const time = new Date().toTimeString();
   core.setOutput("time", time);
 
