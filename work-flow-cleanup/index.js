@@ -13,12 +13,8 @@ try {
   const payload = JSON.stringify(github.context.payload, undefined, 2);
   //console.log(`The event payload: ${payload}`);
 
-
-const { stdout, stderr } = await exec("gh run list --repo dimuthu1982/auto-tag-workflow-testing --json name,number --limit 1");
-
-  console.log(`stdout: ${stdout}`);
-  console.log(`stderr: ${stderr}`);
-
+let pastWorkflows = execSync('gh run list --repo dimuthu1982/auto-tag-workflow-testing --json name,number --limit 1');
+  console.log(`pastWorkflows: ${pastWorkflows}`);
 } catch (error) {
   core.setFailed(error.message);
 }
