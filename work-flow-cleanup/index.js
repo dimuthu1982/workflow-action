@@ -16,7 +16,7 @@ try {
       "en-AU"
     )}`
   );
-
+//gh run list --jq ' .[]| select(.createdAt < (now-( 30 * 86400) | strftime("%Y-%m-%dT%H-%M-%SZ") ))' --json conclusion,databaseId,createdAt --repo dimuthu1982/auto-tag-workflow-testing
   var hasObsoleteWorkflows = false;
 
   do {
