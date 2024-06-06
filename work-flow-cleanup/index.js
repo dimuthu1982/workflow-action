@@ -14,8 +14,8 @@ var options = {
   encoding: 'utf8'
 };
   
-let pastWorkflows = execSync('gh run list --repo dimuthu1982/auto-tag-workflow-testing --json name,number --limit 1', options);
-  console.log(`pastWorkflows: ${pastWorkflows}`);
+let pastWorkflows = execSync('gh run list --repo dimuthu1982/auto-tag-workflow-testing --json name,number,createdAt --limit 5');
+console.log(`pastWorkflows: ${pastWorkflows}`);
 } catch (error) {
   core.setFailed(error.message);
 }
