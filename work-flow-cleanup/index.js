@@ -10,7 +10,7 @@ try {
   console.log(`Retaining Days: ${retainingDays}`);
 
   let pastWorkflowsString = execSync(
-    `gh run list --repo ${repositoryPath} --json name,number,createdAt --limit 60`
+    `gh run list --repo ${repositoryPath} --json name,databaseId,createdAt --limit 60`
   );
 
   const lastDate = new Date();
@@ -30,11 +30,11 @@ try {
     console.log("Data1:" + createdAt + ", Data2:" +  createdAt.toLocaleDateString());
 
     if (lastDate.getTime() > createdAt.getTime()) {
-      console.log(`Deleting [name: ${workFlow.name}, Created: ${workFlow.createdAt}, Number: ${workFlow.number}]`);
-      execSync(`gh run delete --repo ${repositoryPath} ${workFlow.number}`)
+      console.log(`Deleting [name: ${workFlow.name}, Created: ${workFlow.createdAt}, DB ID: ${workFlow.databaseId}]`);
+      execSync(`gh run delete --repo ${repositoryPath} ${workFlow.databaseId}`)
     } else {
       console.log(
-        `Skip [name: ${workFlow.name}, Created: ${workFlow.createdAt}, Number: ${workFlow.number}]`
+        `Skip [name: ${workFlow.name}, Created: ${workFlow.createdAt}, Number: ${workFlow.databaseId}]`
       );
     }
   }
