@@ -3,11 +3,11 @@ const github = require("@actions/github");
 var execSync = require("child_process").execSync;
 
 try {
-  const repository = core.getInput("repository");
+  const repositoryPath = core.getInput("repo-path");
   const time = new Date().toTimeString();
   core.setOutput("time", time);
 
-  console.log("Repo: ${{ repository }}");
+  console.log("Repo Path: ${{ repositoryPath }}");
 
   let pastWorkflows = execSync(
     "gh run list --repo ${{ repository }} --json name,number,createdAt --limit 10"
