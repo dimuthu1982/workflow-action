@@ -18,10 +18,10 @@ try {
   );
 //gh run list --jq ' .[]| select(.createdAt < (now-( 30 * 86400) | strftime("%Y-%m-%dT%H-%M-%SZ") ))' --json conclusion,databaseId,createdAt --repo dimuthu1982/auto-tag-workflow-testing
   var hasObsoleteWorkflows = false;
-  retenction_date="2024-06-05"
+  const retenctionDate = "2024-06-05"
   do {
 
-    let pastWorkflowsString = execSync(`gh run list --repo ${repositoryPath} --jq ' .[]| select(.createdAt < ${retenction_date})' --json name,databaseId,createdAt --limit 50`);
+    let pastWorkflowsString = execSync(`gh run list --repo ${repositoryPath} --jq ' .[]| select(.createdAt < ${retenctionDate})' --json name,databaseId,createdAt --limit 50`);
 
     const pastWorkflows = JSON.parse(pastWorkflowsString);
 
